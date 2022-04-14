@@ -19,7 +19,7 @@ export const notificationsService = {
   getTotals: async () => {
     try {
       const response = await api.get<OperationResponseInterface<NotificationsTotals>>(
-        "/notifications/totals"
+        "/notifications/get-totals"
       );
       return response.data;
     } catch (error) {
