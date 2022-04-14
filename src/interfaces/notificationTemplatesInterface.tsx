@@ -1,5 +1,5 @@
 export interface NotificationTemplatesInterface {
-  id?: number,
+  id: number,
   title: string;
   content: string,
   notificationTemplateType: NotificationTemplateType

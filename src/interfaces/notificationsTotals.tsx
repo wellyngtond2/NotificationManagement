@@ -1,4 +1,4 @@
 export   interface NotificationsTotals {
-  Total: number,
-  UnSentTotal: number;
+  total: number,
+  unSentTotal: number;
 }

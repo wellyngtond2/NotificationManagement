@@ -20,7 +20,9 @@ import { CurrentNotificationContext } from "../../contexts/NotificationsContext"
 
 const notificationSchema = yup.object().shape({
   title: yup.string().required("Title is required"),
-  content: yup.string().required("Content is required")
+  content: yup.string().required("Content is required"),
+  templateId: yup.string().required("Template is required"),
+  personId: yup.string().required("Person is required"),
 });
 
 export default function CreateNotification() {
@@ -29,7 +31,7 @@ export default function CreateNotification() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { current, setCurrent } = useContext(CurrentNotificationContext);
-  const { register, handleSubmit, formState, control } = useForm({
+  const { register, handleSubmit, formState, control, setValue } = useForm({
     resolver: yupResolver(notificationSchema)
   });
   const { errors } = formState;
@@ -51,6 +53,11 @@ export default function CreateNotification() {
   useEffect(() => {
     fetchDataTemplate().catch(err => { console.log(err) });
     fetchDataPerson().catch(err => { console.log(err) });
+    console.log("atual", current);
+    if (current) {
+      setValue("personId", current.personId);
+      setValue("templateId", current?.templateId);
+    }
     setIsLoading(false);
   }, []);
 
@@ -76,9 +83,13 @@ export default function CreateNotification() {
     } = event;
     console.log(value);
     const template = templates.find(t => t.id.toString() === value);
+    console.log(template);
     if (template) {
       const newCurrent = { ...current, templateId: template.id, title: template.title, content: template.content } as NotificationsInterface;
       setCurrent(newCurrent);
+      setValue("templateId", template.id);
+      setValue("title", template.title);
+      setValue("content", template.content);
     }
   };
 
@@ -99,7 +110,8 @@ export default function CreateNotification() {
                   control={control}
                   defaultValue={current?.templateId?.toString()}
                   render={({ field }) =>
-                    <DropBox id="templates" {...field} onChange={handleTemplateChange} >
+                    <DropBox {...field} onChange={handleTemplateChange} error={errors.templateId} >
+                      <option value="">Select</option>
                       {templates.map((item, index) => (
                         <DropBoxItem key={index} value={item.id.toString()} text={item.title} />
                       ))}
@@ -111,7 +123,8 @@ export default function CreateNotification() {
                   control={control}
                   defaultValue={current?.personId?.toString()}
                   render={({ field }) =>
-                    <DropBox {...field} >
+                    <DropBox {...field} error={errors.personId} >
+                      <option value="">Select</option>
                       {people.map((item, index) => (
                         <DropBoxItem key={index} value={item.id.toString()} text={item.name} />
                       ))}

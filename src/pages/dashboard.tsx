@@ -7,13 +7,12 @@ import { NotificationsTotals } from "../interfaces/notificationsTotals";
 import { notificationsService } from "../services/notificationsService";
 
 export default function Dashboard() {
-const [totals, setTotals]=  useState<NotificationsTotals | null>(null);
+  const [totals, setTotals] = useState<NotificationsTotals>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await notificationsService.getTotals();
       if (result?.isSuccess) {
-        console.log(result.data);
         setTotals(result.data);
       }
     }
@@ -26,8 +25,8 @@ const [totals, setTotals]=  useState<NotificationsTotals | null>(null);
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
         <SimpleGrid flex="1" gap="4" minChildWidth="320px">
-          <Card title="Total Notifications" value={totals?.Total ?? 0} valueColor="pink.500" />
-          <Card title="UnSent Notifications" valueColor="#eea320" value={totals?.UnSentTotal ??0}  />
+          <Card title="Total Notifications" value={totals?.total} valueColor="pink.500" />
+          <Card title="UnSent Notifications" valueColor="#eea320" value={totals?.unSentTotal} />
         </SimpleGrid>
       </Flex>
     </Flex>

@@ -7,7 +7,7 @@ interface CardProps extends BoxProps {
   valueColor?: string,
 }
 
-export default function Card({ title, value, valueColor }: CardProps) {
+export default function Card({ title, value, valueColor }: CardProps) {  
   return (
     <Box
       _hover={
