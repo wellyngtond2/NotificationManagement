@@ -2,7 +2,7 @@ import { NotificationsInterface, NotificationsResponseInterface } from "../inter
 import { NotificationsTotals } from "../interfaces/notificationsTotals";
 import { OperationResponseInterface } from "../interfaces/operationResponseInterface";
 import { api } from "./api";
-import { Error } from "../components/Toast";
+import { Error, Success } from "../components/Toast";
 
 export const notificationsService = {
   getAll: async () => {
@@ -30,6 +30,7 @@ export const notificationsService = {
   create: async (data: NotificationsInterface) => {
     try {
       const response = await api.post("/notifications", data);
+      if(response.data.isSuccess) { Success({ description: "Notification created" }); }
       return response.data;
     } catch (error) {
       console.log(error,);
@@ -39,6 +40,7 @@ export const notificationsService = {
   update: async (id: number, data: NotificationsInterface) => {
     try {
       const response = await api.put(`/notifications/${id}`, data);
+      if(response.data.isSuccess) { Success({ description: "Notification updated" }); }
       return response.data;
     } catch (error) {
       console.log(error,);

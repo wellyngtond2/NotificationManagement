@@ -27,7 +27,6 @@ export default function CreateNotificationTemplate() {
   const { errors } = formState;
 
   const handleSave: SubmitHandler<NotificationTemplatesInterface> = async (data, event) => {
-    console.log(data)
     data.notificationTemplateType = parseInt(data.notificationTemplateType.toString());
     let response;
     if (data.id === undefined || data.id === null || data.id?.toString() === "") {

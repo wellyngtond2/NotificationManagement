@@ -27,7 +27,6 @@ export default function NotificationsTemplatesList() {
   }, []);
 
   function handleEdit(data: NotificationTemplatesInterface) {
-    console.log(data);
     setCurrent(data);
   }
 

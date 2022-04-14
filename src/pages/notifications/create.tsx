@@ -53,7 +53,6 @@ export default function CreateNotification() {
   useEffect(() => {
     fetchDataTemplate().catch(err => { console.log(err) });
     fetchDataPerson().catch(err => { console.log(err) });
-    console.log("atual", current);
     if (current) {
       setValue("personId", current.personId);
       setValue("templateId", current?.templateId);
@@ -62,7 +61,6 @@ export default function CreateNotification() {
   }, []);
 
   const handleSave: SubmitHandler<NotificationsInterface> = async (data, event) => {
-    console.log(data);
     data.personId = parseInt(data.personId.toString());
     data.templateId = parseInt(data.templateId.toString());
     let response;
@@ -81,9 +79,9 @@ export default function CreateNotification() {
     const {
       target: { value },
     } = event;
-    console.log(value);
+    
     const template = templates.find(t => t.id.toString() === value);
-    console.log(template);
+    
     if (template) {
       const newCurrent = { ...current, templateId: template.id, title: template.title, content: template.content } as NotificationsInterface;
       setCurrent(newCurrent);

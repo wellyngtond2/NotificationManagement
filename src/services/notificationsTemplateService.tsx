@@ -1,7 +1,7 @@
 import { NotificationTemplatesInterface } from "../interfaces/notificationTemplatesInterface";
 import { OperationResponseInterface, } from "../interfaces/operationResponseInterface";
 import { api } from "./api";
-import { Error } from "../components/Toast";
+import { Error, Success } from "../components/Toast";
 
 export const notificationsTemplateService = {
   getAll: async () => {
@@ -16,6 +16,7 @@ export const notificationsTemplateService = {
   create: async (data: NotificationTemplatesInterface) => {
     try {
       const response = await api.post('/notification-templates', data);
+      if(response.data.isSuccess) { Success({ description: "Notification template created" }); }
       return response.data;
     } catch (error) {
       console.log(error,);
@@ -25,6 +26,7 @@ export const notificationsTemplateService = {
   update: async (id: number, data: NotificationTemplatesInterface) => {
     try {
       const response = await api.put(`/notification-templates/${id}`, data);
+      if(response.data.isSuccess) { Success({ description: "Notification template updated" }); }
       return response.data;
     } catch (error) {
       console.log(error,);

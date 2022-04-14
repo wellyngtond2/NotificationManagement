@@ -17,7 +17,6 @@ export default function NotificationsList() {
     const fetchData = async () => {
       const result = await notificationsService.getAll();
       if (result?.isSuccess) {
-        console.log(result.data);
         setData(result.data);
       }
     }
@@ -25,7 +24,7 @@ export default function NotificationsList() {
   }, []);
 
   function handleEdit(data: NotificationsResponseInterface) {
-    console.log(data, 'X');
+    
     const request: NotificationsInterface = {
       id: data.id,
       title: data.title,
