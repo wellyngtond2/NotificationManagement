@@ -26,8 +26,8 @@ const [totals, setTotals]=  useState<NotificationsTotals | null>(null);
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
         <SimpleGrid flex="1" gap="4" minChildWidth="320px">
-          <Card title="Total Notifications" value={totals?.Total} valueColor="pink.500" />
-          <Card title="UnSent Notifications" valueColor="#eea320" value={totals?.UnSentTotal} />
+          <Card title="Total Notifications" value={totals?.Total ?? 0} valueColor="pink.500" />
+          <Card title="UnSent Notifications" valueColor="#eea320" value={totals?.UnSentTotal ??0}  />
         </SimpleGrid>
       </Flex>
     </Flex>
