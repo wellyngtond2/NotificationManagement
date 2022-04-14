@@ -88,7 +88,7 @@ export default function NotificationsTemplatesList() {
               )}
             </Tbody>
           </Table>
-          <Pagination />
+          {/* <Pagination /> */}
         </Box>
       </Flex>
     </Box>

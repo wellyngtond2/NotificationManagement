@@ -71,7 +71,7 @@ export default function NotificationsList() {
                     {item.wasSent ? 'Yes' : 'No'}
                   </Td>
                   <Td >
-                    <Link href="/notifications/create" passHref >
+                    <Link href={item.wasSent ? "" : "/notifications/create"} passHref >
                       <Button
                         as="a"
                         size="sm"
@@ -79,6 +79,7 @@ export default function NotificationsList() {
                         colorScheme="purple"
                         leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
                         onClick={() => handleEdit(item)}
+                        isDisabled={item.wasSent}
                       >
                         Edit
                       </Button>
@@ -88,7 +89,7 @@ export default function NotificationsList() {
               )}
             </Tbody>
           </Table>
-          <Pagination />
+          {/* <Pagination /> */}
         </Box>
       </Flex>
     </Box>
